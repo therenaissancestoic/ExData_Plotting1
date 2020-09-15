@@ -1,7 +1,6 @@
 ##Creating plot3
 
 ##Establish a directory to load zip file
-
 setwd("C:/Users/kenny.c.mcdowell/Documents/Coursera Courses/Exploratory Data Analysis/Project 1/")
 
 ##Read the data into a table
@@ -19,28 +18,26 @@ sub_data$datetime <- strptime(paste(sub_data$Date, sub_data$Time), "%Y-%m-%d %H:
 #Prepare datetime data
 sub_data$datetime <- as.POSIXct(sub_data$datetime)
 
-
 ## Rename variables
 globalActivePower <- sub_data$Global_active_power
 subMetering1 <- sub_data$Sub_metering_1
 subMetering2 <- sub_data$Sub_metering_2
 subMetering3 <- sub_data$Sub_metering_3
 
+##Create a png file
+png("plot3.png", width = 480, height = 480,
+    units = "px", type = "cairo")
 
 ##Plot the energy submetering data
 attach(sub_data)
-plot(sub_data$datetime, subMetering1, type = "l", ylab = "Energy Submetering", xlab = "", col = "black")
+plot(sub_data$datetime, subMetering1, type = "l", ylab = "Energy Sub metering", xlab = "", col = "black")
 lines(sub_data$datetime, subMetering2, type= "l", col = "red")
 lines(sub_data$datetime, subMetering3, type= "l", col = "blue")
 
 ##Create a legend 
 legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
-       lty = 1, lwd = 2.5, col = c("black", "red", "blue"))
+       lty = 1, lwd = 1, col = c("black", "red", "blue"))
 
-
-##Create a png file
-dev.copy(png, file = "plot3.png", height = 480, width = 480, 
-         units = "px", bg = "transparent")
 dev.off()
 detach(sub_data)
 

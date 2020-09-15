@@ -1,7 +1,6 @@
 ##Creating plot2
 
 ##Establish a directory to load zip file
-
 setwd("C:/Users/kenny.c.mcdowell/Documents/Coursera Courses/Exploratory Data Analysis/Project 1/")
 
 ##Read the data into a table
@@ -22,12 +21,15 @@ sub_data$datetime <- strptime(paste(sub_data$Date, sub_data$Time), format = "%Y-
 ##Prepare datetime data
 sub_data$datetime <- as.POSIXct(sub_data$datetime)
 
+##Create a png file
+png("plot2.png", height = 480, width = 480, 
+         units = "px", type = "cairo")
+
 ##Create plot2
 attach(sub_data)
 
 plot(Global_active_power ~ datetime, type="l",
      ylab = "Global Active Power (kilowatts)", xlab = "")
 
-dev.copy(png, file = "plot2.png", height = 480, width = 480)
 dev.off()
 detach(sub_data)

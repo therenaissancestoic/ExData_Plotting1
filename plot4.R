@@ -1,7 +1,6 @@
 ##Creating plot4
 
 ##Establish a directory to load zip file
-
 setwd("C:/Users/kenny.c.mcdowell/Documents/Coursera Courses/Exploratory Data Analysis/Project 1/")
 
 ##Read the data into a table
@@ -26,23 +25,27 @@ subMetering2 <- sub_data$Sub_metering_2
 subMetering3 <- sub_data$Sub_metering_3
 voltage <-sub_data$Voltage
 
-##Plot the data
-attach(sub_data)
-
-png(file = "plot4.png", height = 480, width = 480)
+##Create a png file
+png(file = "plot4.png", height = 480, width = 480, units = "px", type = "cairo")
 par(mfrow= c(2,2))
 
+##Plot the data
+attach(sub_data)
+##Topleft
 plot(Global_active_power ~ datetime, type="l",
-     ylab = "Global Active Power", xlab = "", cex = .2)
+     ylab = "Global Active Power", xlab = "")
 
-plot(sub_data$datetime, voltage, type = "l", xlab = "datetime", ylab = "voltage")
+##Topright
+plot(sub_data$datetime, voltage, type = "l", xlab = "datetime", ylab = "Voltage")
 
-plot(sub_data$datetime, subMetering1, type = "l", ylab = "Energy Submetering", xlab = "")
+##Bottomleft
+plot(sub_data$datetime, subMetering1, type = "l", ylab = "Energy Sub metering", xlab = "")
 lines(sub_data$datetime, subMetering2, type= "l", col = "red")
 lines(sub_data$datetime, subMetering3, type= "l", col = "blue")
-legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
-       lty = 1, lwd = 2.5, col = c("black", "red", "blue"))
+legend("topright", c("Sub_metering_1 ", "Sub_metering_2 ", "Sub_metering_3 "), 
+         bty= "n", lty = 1, lwd = 1, col = c("black", "red", "blue"))
 
+##Bottomright
 plot(Global_reactive_power ~ datetime, type="l",
      ylab = "Global_reactive_power", xlab = "datetime")
 
